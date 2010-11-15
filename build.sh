@@ -1,4 +1,4 @@
-CHROOT=centos-5.5-x86_64
+CHROOT=frameos-5.5
 CHROOT_DIR=/var/lib/mock/$CHROOT/root
 MOCK_CMD="/usr/bin/mock --disable-plugin ccache"
 

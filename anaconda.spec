@@ -4,7 +4,7 @@
 Summary: Graphical system installer
 Name:    anaconda
 Version: 13.21.82
-Release: 1.frameos
+Release: 1.p1.frameos
 License: GPLv2+
 Group:   Applications/System
 URL:     http://fedoraproject.org/wiki/Anaconda
@@ -225,6 +225,9 @@ update-desktop-database &> /dev/null || :
 %endif
 
 %changelog
+* Sun Dec 12 2010 Sergio Rubio <rubiojr@frameos.org> - 1.21.82-1.p1.frameos
+- Add FrameOS patches
+
 * Mon Aug 30 2010 David Cantrell <dcantrell@redhat.com> - 13.21.82-1
 - Disable BETANAG for RHEL6 (clumens).
   Resolves: rhbz#628459

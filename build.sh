@@ -1,4 +1,5 @@
-CHROOT=frameos-5.5
+#!/bin/bash
+CHROOT=frameos-6-preview
 CHROOT_DIR=/var/lib/mock/$CHROOT/root
 MOCK_CMD="/usr/bin/mock --disable-plugin ccache"
 

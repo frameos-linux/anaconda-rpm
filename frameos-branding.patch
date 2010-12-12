@@ -1,0 +1,1360 @@
+diff -uNr -uNr anaconda-13.21.82.orig/installclasses/rhel.py anaconda-13.21.82/installclasses/rhel.py
+--- anaconda-13.21.82.orig/installclasses/rhel.py	2010-11-15 17:23:17.845332801 +0100
++++ anaconda-13.21.82/installclasses/rhel.py	2010-12-12 14:37:51.648976197 +0100
+@@ -30,7 +30,7 @@
+ class InstallClass(BaseInstallClass):
+     # name has underscore used for mnemonics, strip if you dont need it
+     id = "rhel"
+-    name = N_("Red Hat Enterprise Linux")
++    name = N_("FrameOS Linux")
+     _description = N_("The default installation of %s is a minimum install. "
+                      "You can optionally select a different set of software "
+                      "now.")
+@@ -75,21 +75,6 @@
+             return True
+ 
+         productUpgrades = {
+-            "Red Hat Enterprise Linux AS": ("Red Hat Linux Advanced Server", ),
+-            "Red Hat Enterprise Linux WS": ("Red Hat Linux Advanced Workstation",),
+-            # FIXME: this probably shouldn't be in a release...
+-            "Red Hat Enterprise Linux": ("Red Hat Linux Advanced Server",
+-                                         "Red Hat Linux Advanced Workstation",
+-                                         "Red Hat Enterprise Linux AS",
+-                                         "Red Hat Enterprise Linux ES",
+-                                         "Red Hat Enterprise Linux WS"),
+-            "Red Hat Enterprise Linux Server": ("Red Hat Enterprise Linux AS",
+-                                                "Red Hat Enterprise Linux ES",
+-                                                "Red Hat Enterprise Linux WS",
+-                                                "Red Hat Enterprise Linux"),
+-            "Red Hat Enterprise Linux Client": ("Red Hat Enterprise Linux WS",
+-                                                "Red Hat Enterprise Linux Desktop",
+-                                                "Red Hat Enterprise Linux"),
+         }
+ 
+         if productUpgrades.has_key(productName):
+diff -uNr -uNr anaconda-13.21.82.orig/packages.py anaconda-13.21.82/packages.py
+--- anaconda-13.21.82.orig/packages.py	2010-11-15 17:23:17.962595829 +0100
++++ anaconda-13.21.82/packages.py	2010-12-12 14:36:37.963976689 +0100
+@@ -324,8 +324,8 @@
+                            root = instRoot)
+ 
+ def betaNagScreen(anaconda):
+-    publicBetas = { "Red Hat Linux": "Red Hat Linux Public Beta",
+-                    "Red Hat Enterprise Linux": "Red Hat Enterprise Linux Public Beta",
++    publicBetas = { "FrameOS Linux": "FrameOS Linux Public Beta",
++                    "FrameOS Linux": "FrameOS Linux Public Beta",
+                     "Fedora Core": "Fedora Core",
+                     "Fedora": "Fedora" }
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/af.po anaconda-13.21.82/po/af.po
+--- anaconda-13.21.82.orig/po/af.po	2010-11-15 17:23:17.932594703 +0100
++++ anaconda-13.21.82/po/af.po	2010-12-12 14:36:37.975976885 +0100
+@@ -2206,8 +2206,8 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux WS"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux WS"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/am.po anaconda-13.21.82/po/am.po
+--- anaconda-13.21.82.orig/po/am.po	2010-11-15 17:23:17.889333047 +0100
++++ anaconda-13.21.82/po/am.po	2010-12-12 14:36:37.981984980 +0100
+@@ -2146,7 +2146,7 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "ሬድ ሀት ድርጅት ሊኑክስ ደብሊውኤስ"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/anaconda.pot anaconda-13.21.82/po/anaconda.pot
+--- anaconda-13.21.82.orig/po/anaconda.pot	2010-11-15 17:23:17.929596274 +0100
++++ anaconda-13.21.82/po/anaconda.pot	2010-12-12 14:36:37.988980304 +0100
+@@ -1911,7 +1911,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/ar.po anaconda-13.21.82/po/ar.po
+--- anaconda-13.21.82.orig/po/ar.po	2010-11-15 17:23:17.917368302 +0100
++++ anaconda-13.21.82/po/ar.po	2010-12-12 14:36:37.994974989 +0100
+@@ -2125,7 +2125,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "مشروع ريد هات لينوكس"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/as.po anaconda-13.21.82/po/as.po
+--- anaconda-13.21.82.orig/po/as.po	2010-11-15 17:23:17.943599305 +0100
++++ anaconda-13.21.82/po/as.po	2010-12-12 14:36:38.002000276 +0100
+@@ -2199,8 +2199,8 @@
+ msgstr "ন্যুনতম"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/bal.po anaconda-13.21.82/po/bal.po
+--- anaconda-13.21.82.orig/po/bal.po	2010-11-15 17:23:17.941591948 +0100
++++ anaconda-13.21.82/po/bal.po	2010-12-12 14:36:38.007998244 +0100
+@@ -1933,7 +1933,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/be.po anaconda-13.21.82/po/be.po
+--- anaconda-13.21.82.orig/po/be.po	2010-11-15 17:23:17.901333330 +0100
++++ anaconda-13.21.82/po/be.po	2010-12-12 14:36:38.011998357 +0100
+@@ -2042,7 +2042,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/bg.po anaconda-13.21.82/po/bg.po
+--- anaconda-13.21.82.orig/po/bg.po	2010-11-15 17:23:17.894333176 +0100
++++ anaconda-13.21.82/po/bg.po	2010-12-12 14:36:38.020975053 +0100
+@@ -2216,8 +2216,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/bn_IN.po anaconda-13.21.82/po/bn_IN.po
+--- anaconda-13.21.82.orig/po/bn_IN.po	2010-11-15 17:23:17.918367895 +0100
++++ anaconda-13.21.82/po/bn_IN.po	2010-12-12 14:36:38.025975036 +0100
+@@ -2332,8 +2332,8 @@
+ msgstr "ন্যূনতম"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/bn.po anaconda-13.21.82/po/bn.po
+--- anaconda-13.21.82.orig/po/bn.po	2010-11-15 17:23:17.906332762 +0100
++++ anaconda-13.21.82/po/bn.po	2010-12-12 14:36:38.033984968 +0100
+@@ -2314,8 +2314,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7544,7 +7544,7 @@
+ #~ "উপেক্ষা করা হলে:\n"
+ #~ "* আপনার সাবস্ক্রিপশনের সাথে যুক্ত সম্পূর্ণ প্যাকেজ সংকলন ব্যবহারের সুঢ়োগ আপনার "
+ #~ "হাতছাড়া হতে পারে।\n"
+-#~ "* অসমর্থিত/অননুমোদিত Red Hat Enterprise Linux ইনস্টলেশন স্থাপিত হবে।\n"
++#~ "* অসমর্থিত/অননুমোদিত FrameOS Linux ইনস্টলেশন স্থাপিত হবে।\n"
+ #~ "* আপনার সাবস্ক্রিপশনের মধ্যে অন্তর্ভুক্ত না করা প্যাকেজের জন্য সফ্টওয়্যার ও নিরাপত্তা "
+ #~ "সংক্রান্ত আপডেট উপলব্ধ করা হবে না।"
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/bs.po anaconda-13.21.82/po/bs.po
+--- anaconda-13.21.82.orig/po/bs.po	2010-11-15 17:23:17.941591948 +0100
++++ anaconda-13.21.82/po/bs.po	2010-12-12 14:36:38.049224898 +0100
+@@ -2218,8 +2218,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ca.po anaconda-13.21.82/po/ca.po
+--- anaconda-13.21.82.orig/po/ca.po	2010-11-15 17:23:17.951593882 +0100
++++ anaconda-13.21.82/po/ca.po	2010-12-12 14:36:38.056984303 +0100
+@@ -2230,8 +2230,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7522,7 +7522,7 @@
+ #~ "* No podreu obtenir accés a tota la col·lecció de paquets inclosos a la "
+ #~ "vostra subscripció.\n"
+ #~ "* Pot ser que resulti ser una instal·lació no suportada o certificada de "
+-#~ "Red Hat Enterprise Linux.\n"
++#~ "FrameOS Linux.\n"
+ #~ "* No obtindreu actualitzacions del programari ni de seguretat per als "
+ #~ "paquets que no estiguin inclosos a la subscripció."
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/cs.po anaconda-13.21.82/po/cs.po
+--- anaconda-13.21.82.orig/po/cs.po	2010-11-15 17:23:17.899333027 +0100
++++ anaconda-13.21.82/po/cs.po	2010-12-12 14:36:38.061979118 +0100
+@@ -2200,8 +2200,8 @@
+ msgstr "Minimální"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/cy.po anaconda-13.21.82/po/cy.po
+--- anaconda-13.21.82.orig/po/cy.po	2010-11-15 17:23:17.951593882 +0100
++++ anaconda-13.21.82/po/cy.po	2010-12-12 14:36:38.067994966 +0100
+@@ -2187,8 +2187,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/da.po anaconda-13.21.82/po/da.po
+--- anaconda-13.21.82.orig/po/da.po	2010-11-15 17:23:17.885334327 +0100
++++ anaconda-13.21.82/po/da.po	2010-12-12 14:36:38.073984900 +0100
+@@ -2201,8 +2201,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+@@ -7473,7 +7473,7 @@
+ #~ "* Kan du ikke få adgang til det fulde sæt af understøttede pakker "
+ #~ "indeholdt i dit abonnement.\n"
+ #~ "* Dette kan resultere i et ikke-understøttet/ucertificeret installation "
+-#~ "af Red Hat Enterprise Linux.\n"
++#~ "af FrameOS Linux.\n"
+ #~ "* Du vil ikke få software- og sikkerhedsopdateringer for pakker der ikke "
+ #~ "er indeholdt i dit abonnement."
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/de_CH.po anaconda-13.21.82/po/de_CH.po
+--- anaconda-13.21.82.orig/po/de_CH.po	2010-11-15 17:23:17.944591982 +0100
++++ anaconda-13.21.82/po/de_CH.po	2010-12-12 14:36:38.079975046 +0100
+@@ -2294,8 +2294,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7632,7 +7632,7 @@
+ #~ "* Bekommen Sie möglicherweise keinen Zugriff auf das komplette Set der im "
+ #~ "Rahmen Ihres Abonnements zur Verfügung stehenden Pakete,\n"
+ #~ "* Resultiert dies möglicherweise in einer nicht unterstützten/nicht "
+-#~ "zertifizierten Installation von Red Hat Enterprise Linux,\n"
++#~ "zertifizierten Installation von FrameOS Linux,\n"
+ #~ "* Bekommen Sie keine Software- und Sicherheits-Aktualisierungen für "
+ #~ "Pakete ausserhalb Ihres Abonnements."
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/de.po anaconda-13.21.82/po/de.po
+--- anaconda-13.21.82.orig/po/de.po	2010-11-15 17:23:17.909333356 +0100
++++ anaconda-13.21.82/po/de.po	2010-12-12 14:36:38.085994804 +0100
+@@ -2316,8 +2316,8 @@
+ msgstr "Minimal"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/el.po anaconda-13.21.82/po/el.po
+--- anaconda-13.21.82.orig/po/el.po	2010-11-15 17:23:17.882333453 +0100
++++ anaconda-13.21.82/po/el.po	2010-12-12 14:36:38.092984891 +0100
+@@ -2260,8 +2260,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7622,7 +7622,7 @@
+ #~ "* Μπορεί να μην έχετε πρόσβαση σε όλα τα πακέτα που περιλαμβάνονται στη "
+ #~ "συνδρομή σας.\n"
+ #~ "* Μπορεί να καταλήξει σε μια μη υποστηριζόμενη/μη πιστοποιημένη "
+-#~ "εγκατάσταση του Red Hat Enterprise Linux.\n"
++#~ "εγκατάσταση του FrameOS Linux.\n"
+ #~ "* Δεν θα λάβετε ενημερώσεις λογισμικού και ασφαλείας για τα πακέτα που "
+ #~ "δεν περιλαμβάνονται στη συνδρομή σας."
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/en@boldquot.po anaconda-13.21.82/po/en@boldquot.po
+--- anaconda-13.21.82.orig/po/en@boldquot.po	2010-11-15 17:23:17.927599672 +0100
++++ anaconda-13.21.82/po/en@boldquot.po	2010-12-12 14:36:38.101974022 +0100
+@@ -2240,8 +2240,8 @@
+ msgstr "Minimal"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/en_GB.po anaconda-13.21.82/po/en_GB.po
+--- anaconda-13.21.82.orig/po/en_GB.po	2010-11-15 17:23:17.875344754 +0100
++++ anaconda-13.21.82/po/en_GB.po	2010-12-12 14:36:38.108974444 +0100
+@@ -2188,8 +2188,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/en@quot.po anaconda-13.21.82/po/en@quot.po
+--- anaconda-13.21.82.orig/po/en@quot.po	2010-11-15 17:23:17.942586442 +0100
++++ anaconda-13.21.82/po/en@quot.po	2010-12-12 14:36:38.113984345 +0100
+@@ -2235,8 +2235,8 @@
+ msgstr "Minimal"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/es.po anaconda-13.21.82/po/es.po
+--- anaconda-13.21.82.orig/po/es.po	2010-11-15 17:23:17.898333853 +0100
++++ anaconda-13.21.82/po/es.po	2010-12-12 14:36:38.121979609 +0100
+@@ -3103,7 +3103,7 @@
+ msgstr "Mínima"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "Linux para Empresas de Red Hat"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/et.po anaconda-13.21.82/po/et.po
+--- anaconda-13.21.82.orig/po/et.po	2010-11-15 17:23:17.911332891 +0100
++++ anaconda-13.21.82/po/et.po	2010-12-12 14:36:38.127984422 +0100
+@@ -2169,8 +2169,8 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux WS"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux WS"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/eu_ES.po anaconda-13.21.82/po/eu_ES.po
+--- anaconda-13.21.82.orig/po/eu_ES.po	2010-11-15 17:23:17.883332976 +0100
++++ anaconda-13.21.82/po/eu_ES.po	2010-12-12 14:36:38.132984683 +0100
+@@ -1921,7 +1921,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/eu.po anaconda-13.21.82/po/eu.po
+--- anaconda-13.21.82.orig/po/eu.po	2010-11-15 17:23:17.912334719 +0100
++++ anaconda-13.21.82/po/eu.po	2010-12-12 14:36:38.137974888 +0100
+@@ -1956,7 +1956,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/fa.po anaconda-13.21.82/po/fa.po
+--- anaconda-13.21.82.orig/po/fa.po	2010-11-15 17:23:17.907332843 +0100
++++ anaconda-13.21.82/po/fa.po	2010-12-12 14:36:38.142998130 +0100
+@@ -2198,7 +2198,7 @@
+ msgstr "خرد(محدود)"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "لینوکس اینترپرایز ردهت"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/fi.po anaconda-13.21.82/po/fi.po
+--- anaconda-13.21.82.orig/po/fi.po	2010-11-15 17:23:17.946593822 +0100
++++ anaconda-13.21.82/po/fi.po	2010-12-12 14:36:38.148997215 +0100
+@@ -2473,8 +2473,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+@@ -8311,7 +8311,7 @@
+ #~ "\n"
+ #~ "Jos ohitat tämän vaiheen:\n"
+ #~ "* Et välttämättä saa käyttöösi kaikkia tilaukseesi kuuluvia paketteja.\n"
+-#~ "* Red Hat Enterprise Linux -asennuksesi ei välttämättä ole tuettu tai "
++#~ "* FrameOS Linux -asennuksesi ei välttämättä ole tuettu tai "
+ #~ "sertifioitu.\n"
+ #~ "* Et saa ohjelmisto- ja turvallisuuspäivityksiä paketeille, jotka eivät "
+ #~ "kuulu tilaukseesi."
+diff -uNr -uNr anaconda-13.21.82.orig/po/fr.po anaconda-13.21.82/po/fr.po
+--- anaconda-13.21.82.orig/po/fr.po	2010-11-15 17:23:17.933591363 +0100
++++ anaconda-13.21.82/po/fr.po	2010-12-12 14:36:38.154998396 +0100
+@@ -2308,8 +2308,8 @@
+ msgstr "Minimale"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/gl.po anaconda-13.21.82/po/gl.po
+--- anaconda-13.21.82.orig/po/gl.po	2010-11-15 17:23:17.934594238 +0100
++++ anaconda-13.21.82/po/gl.po	2010-12-12 14:36:38.160980928 +0100
+@@ -1975,7 +1975,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/gu.po anaconda-13.21.82/po/gu.po
+--- anaconda-13.21.82.orig/po/gu.po	2010-11-15 17:23:17.947596558 +0100
++++ anaconda-13.21.82/po/gu.po	2010-12-12 14:36:38.168974168 +0100
+@@ -2180,8 +2180,8 @@
+ msgstr "ન્યૂનત્તમ"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/he.po anaconda-13.21.82/po/he.po
+--- anaconda-13.21.82.orig/po/he.po	2010-11-15 17:23:17.952593754 +0100
++++ anaconda-13.21.82/po/he.po	2010-12-12 14:36:38.176984798 +0100
+@@ -2412,8 +2412,8 @@
+ 
+ #
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+@@ -8105,7 +8105,7 @@
+ #~ "\n"
+ #~ "דילוג על שלב זה עלול לגרום:\n"
+ #~ "* יתכן ולא תהיה לך גישה לאוסף החבילות הכלול במנוי שלך.\n"
+-#~ "* להתקנה לא נתמכת/לא מוסמכת של Red Hat Enterprise Linux.\n"
++#~ "* להתקנה לא נתמכת/לא מוסמכת של FrameOS Linux.\n"
+ #~ "* אי קבלת עדכוני תוכנה ועדכוני אבטחה עבור החבילות שלא כלולות במנוי שלך."
+ 
+ #
+diff -uNr -uNr anaconda-13.21.82.orig/po/hi.po anaconda-13.21.82/po/hi.po
+--- anaconda-13.21.82.orig/po/hi.po	2010-11-15 17:23:17.948593916 +0100
++++ anaconda-13.21.82/po/hi.po	2010-12-12 14:36:38.183974534 +0100
+@@ -2214,8 +2214,8 @@
+ msgstr "न्यूनतम"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/hr.po anaconda-13.21.82/po/hr.po
+--- anaconda-13.21.82.orig/po/hr.po	2010-11-15 17:23:17.932594703 +0100
++++ anaconda-13.21.82/po/hr.po	2010-12-12 14:36:38.190984176 +0100
+@@ -2215,8 +2215,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7366,7 +7366,7 @@
+ #~ "* Nećete imati pristup cijelokupnom kompletu paketa obuhvaćenih vašom "
+ #~ "pretplatom.\n"
+ #~ "* Rezultat bi mogla biti nepodržana ili neovlaštena instalacija sustava "
+-#~ "Red Hat Enterprise Linux.\n"
++#~ "FrameOS Linux.\n"
+ #~ "* Nećete primati softverska i sigurnosna ažuriranja paketa koji nisu "
+ #~ "obuhvaćeni vašom pretplatom."
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/hu.po anaconda-13.21.82/po/hu.po
+--- anaconda-13.21.82.orig/po/hu.po	2010-11-15 17:23:17.938594356 +0100
++++ anaconda-13.21.82/po/hu.po	2010-12-12 14:36:38.197984879 +0100
+@@ -2195,8 +2195,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/hy.po anaconda-13.21.82/po/hy.po
+--- anaconda-13.21.82.orig/po/hy.po	2010-11-15 17:23:17.953593696 +0100
++++ anaconda-13.21.82/po/hy.po	2010-12-12 14:36:38.203239999 +0100
+@@ -1940,8 +1940,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/id.po anaconda-13.21.82/po/id.po
+--- anaconda-13.21.82.orig/po/id.po	2010-11-15 17:23:17.900333039 +0100
++++ anaconda-13.21.82/po/id.po	2010-12-12 14:36:38.207234662 +0100
+@@ -2169,8 +2169,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ilo.po anaconda-13.21.82/po/ilo.po
+--- anaconda-13.21.82.orig/po/ilo.po	2010-11-15 17:23:17.926585831 +0100
++++ anaconda-13.21.82/po/ilo.po	2010-12-12 14:36:38.212234576 +0100
+@@ -2227,8 +2227,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/is.po anaconda-13.21.82/po/is.po
+--- anaconda-13.21.82.orig/po/is.po	2010-11-15 17:23:17.951593882 +0100
++++ anaconda-13.21.82/po/is.po	2010-12-12 14:36:38.217244755 +0100
+@@ -2175,8 +2175,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/it.po anaconda-13.21.82/po/it.po
+--- anaconda-13.21.82.orig/po/it.po	2010-11-15 17:23:17.884333128 +0100
++++ anaconda-13.21.82/po/it.po	2010-12-12 14:36:38.222229372 +0100
+@@ -2277,8 +2277,8 @@
+ msgstr "Minimo"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ja.po anaconda-13.21.82/po/ja.po
+--- anaconda-13.21.82.orig/po/ja.po	2010-11-15 17:23:17.945593949 +0100
++++ anaconda-13.21.82/po/ja.po	2010-12-12 14:36:38.227249052 +0100
+@@ -2234,8 +2234,8 @@
+ msgstr "最低限"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ka.po anaconda-13.21.82/po/ka.po
+--- anaconda-13.21.82.orig/po/ka.po	2010-11-15 17:23:17.887332953 +0100
++++ anaconda-13.21.82/po/ka.po	2010-12-12 14:36:38.232985179 +0100
+@@ -1947,7 +1947,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/kn.po anaconda-13.21.82/po/kn.po
+--- anaconda-13.21.82.orig/po/kn.po	2010-11-15 17:23:17.923585376 +0100
++++ anaconda-13.21.82/po/kn.po	2010-12-12 14:36:38.238973648 +0100
+@@ -2234,8 +2234,8 @@
+ msgstr "ಕನಿಷ್ಟ ಅಗತ್ಯವಿರುವ"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ko.po anaconda-13.21.82/po/ko.po
+--- anaconda-13.21.82.orig/po/ko.po	2010-11-15 17:23:17.950591914 +0100
++++ anaconda-13.21.82/po/ko.po	2010-12-12 14:36:38.245984966 +0100
+@@ -2197,8 +2197,8 @@
+ msgstr "최소"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ku.po anaconda-13.21.82/po/ku.po
+--- anaconda-13.21.82.orig/po/ku.po	2010-11-15 17:23:17.912334719 +0100
++++ anaconda-13.21.82/po/ku.po	2010-12-12 14:36:38.249993389 +0100
+@@ -1909,7 +1909,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/lo.po anaconda-13.21.82/po/lo.po
+--- anaconda-13.21.82.orig/po/lo.po	2010-11-15 17:23:17.934594238 +0100
++++ anaconda-13.21.82/po/lo.po	2010-12-12 14:36:38.255997713 +0100
+@@ -1909,7 +1909,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/lt.po anaconda-13.21.82/po/lt.po
+--- anaconda-13.21.82.orig/po/lt.po	2010-11-15 17:23:17.933591363 +0100
++++ anaconda-13.21.82/po/lt.po	2010-12-12 14:36:38.259997684 +0100
+@@ -2021,7 +2021,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/lv.po anaconda-13.21.82/po/lv.po
+--- anaconda-13.21.82.orig/po/lv.po	2010-11-15 17:23:17.919585049 +0100
++++ anaconda-13.21.82/po/lv.po	2010-12-12 14:36:38.263997449 +0100
+@@ -2168,7 +2168,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/mai.po anaconda-13.21.82/po/mai.po
+--- anaconda-13.21.82.orig/po/mai.po	2010-11-15 17:23:17.881334489 +0100
++++ anaconda-13.21.82/po/mai.po	2010-12-12 14:36:38.270005125 +0100
+@@ -2168,8 +2168,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/mk.po anaconda-13.21.82/po/mk.po
+--- anaconda-13.21.82.orig/po/mk.po	2010-11-15 17:23:17.879332789 +0100
++++ anaconda-13.21.82/po/mk.po	2010-12-12 14:36:38.275998692 +0100
+@@ -2239,8 +2239,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ml.po anaconda-13.21.82/po/ml.po
+--- anaconda-13.21.82.orig/po/ml.po	2010-11-15 17:23:17.935593971 +0100
++++ anaconda-13.21.82/po/ml.po	2010-12-12 14:36:38.284979160 +0100
+@@ -2212,8 +2212,8 @@
+ msgstr "ഏറ്റവും കുറഞ്ഞതു്"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/mr.po anaconda-13.21.82/po/mr.po
+--- anaconda-13.21.82.orig/po/mr.po	2010-11-15 17:23:17.913361341 +0100
++++ anaconda-13.21.82/po/mr.po	2010-12-12 14:36:38.292985041 +0100
+@@ -2177,8 +2177,8 @@
+ msgstr "किमान"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ms.po anaconda-13.21.82/po/ms.po
+--- anaconda-13.21.82.orig/po/ms.po	2010-11-15 17:23:17.893332955 +0100
++++ anaconda-13.21.82/po/ms.po	2010-12-12 14:36:38.299998246 +0100
+@@ -2197,8 +2197,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/my.po anaconda-13.21.82/po/my.po
+--- anaconda-13.21.82.orig/po/my.po	2010-11-15 17:23:17.941591948 +0100
++++ anaconda-13.21.82/po/my.po	2010-12-12 14:36:38.303981386 +0100
+@@ -1909,7 +1909,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/nb.po anaconda-13.21.82/po/nb.po
+--- anaconda-13.21.82.orig/po/nb.po	2010-11-15 17:23:17.929596274 +0100
++++ anaconda-13.21.82/po/nb.po	2010-12-12 14:36:38.308983186 +0100
+@@ -2153,8 +2153,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ne.po anaconda-13.21.82/po/ne.po
+--- anaconda-13.21.82.orig/po/ne.po	2010-11-15 17:23:17.949593439 +0100
++++ anaconda-13.21.82/po/ne.po	2010-12-12 14:36:38.316999612 +0100
+@@ -2171,7 +2171,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "रेड ह्याट उद्यमशीलता लिनक्स"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/nl.po anaconda-13.21.82/po/nl.po
+--- anaconda-13.21.82.orig/po/nl.po	2010-11-15 17:23:17.942586442 +0100
++++ anaconda-13.21.82/po/nl.po	2010-12-12 14:36:38.322997860 +0100
+@@ -2267,8 +2267,8 @@
+ msgstr "Minimaal"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+@@ -7693,7 +7693,7 @@
+ #~ "* Kunt u wellicht geen toegang krijgen tot de volledige verzameling van "
+ #~ "pakketten in uw abonnement.\n"
+ #~ "* Kan dit resulteren in een niet-ondersteunde/niet-gecertificeerde "
+-#~ "installatie van Red Hat Enterprise Linux.\n"
++#~ "installatie van FrameOS Linux.\n"
+ #~ "* Zult u geen software en beveiligingsupdates kunnen krijgen voor "
+ #~ "pakketten die niet in uw abonnement zitten."
+ 
+diff -uNr -uNr anaconda-13.21.82.orig/po/nn.po anaconda-13.21.82/po/nn.po
+--- anaconda-13.21.82.orig/po/nn.po	2010-11-15 17:23:17.937595950 +0100
++++ anaconda-13.21.82/po/nn.po	2010-12-12 14:36:38.327998612 +0100
+@@ -60,7 +60,7 @@
+ #: anaconda:537
+ #, fuzzy
+ msgid "Starting graphical installation."
+-msgstr "Søkjer etter Red Hat Linux installasjonar..."
++msgstr "Søkjer etter FrameOS Linux installasjonar..."
+ 
+ #: anaconda:893
+ #, fuzzy
+@@ -1523,7 +1523,7 @@
+ #: vnc.py:140
+ #, fuzzy, python-format
+ msgid "%(productName)s %(productVersion)s installation on host %(name)s"
+-msgstr "Red Hat Linux installasjon på %s"
++msgstr "FrameOS Linux installasjon på %s"
+ 
+ #: vnc.py:146
+ #, python-format
+@@ -2027,8 +2027,8 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/nso.po anaconda-13.21.82/po/nso.po
+--- anaconda-13.21.82.orig/po/nso.po	2010-11-15 17:23:17.950591914 +0100
++++ anaconda-13.21.82/po/nso.po	2010-12-12 14:36:38.331997535 +0100
+@@ -2243,8 +2243,8 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
+-msgstr "WS ya Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "WS ya FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/or.po anaconda-13.21.82/po/or.po
+--- anaconda-13.21.82.orig/po/or.po	2010-11-15 17:23:17.938594356 +0100
++++ anaconda-13.21.82/po/or.po	2010-12-12 14:36:38.337997388 +0100
+@@ -2189,8 +2189,8 @@
+ msgstr "ସର୍ବନିମ୍ନ"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/pa.po anaconda-13.21.82/po/pa.po
+--- anaconda-13.21.82.orig/po/pa.po	2010-11-15 17:23:17.926585831 +0100
++++ anaconda-13.21.82/po/pa.po	2010-12-12 14:36:38.347984434 +0100
+@@ -2169,8 +2169,8 @@
+ msgstr "ਘੱਟੋ-ਘੱਟ"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/pl.po anaconda-13.21.82/po/pl.po
+--- anaconda-13.21.82.orig/po/pl.po	2010-11-15 17:23:17.931594412 +0100
++++ anaconda-13.21.82/po/pl.po	2010-12-12 14:36:38.353984776 +0100
+@@ -2253,8 +2253,8 @@
+ msgstr "Minimalna"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/pt_BR.po anaconda-13.21.82/po/pt_BR.po
+--- anaconda-13.21.82.orig/po/pt_BR.po	2010-11-15 17:23:17.943599305 +0100
++++ anaconda-13.21.82/po/pt_BR.po	2010-12-12 14:36:38.358992162 +0100
+@@ -2265,8 +2265,8 @@
+ msgstr "Mínimo"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/pt.po anaconda-13.21.82/po/pt.po
+--- anaconda-13.21.82.orig/po/pt.po	2010-11-15 17:23:17.946593822 +0100
++++ anaconda-13.21.82/po/pt.po	2010-12-12 14:36:38.363992774 +0100
+@@ -1,4 +1,4 @@
+-# Portuguese localization of Red Hat Linux
++# Portuguese localization of FrameOS Linux
+ # Pedro Morais <morais@kde.org>
+ # José Nuno Pires <jncp@netcabo.pt>
+ # Rui Gouveia <rui.gouveia@globaltek.pt>
+@@ -2300,8 +2300,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ro.po anaconda-13.21.82/po/ro.po
+--- anaconda-13.21.82.orig/po/ro.po	2010-11-15 17:23:17.920585620 +0100
++++ anaconda-13.21.82/po/ro.po	2010-12-12 14:36:38.369997866 +0100
+@@ -2133,7 +2133,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+@@ -7051,7 +7051,7 @@
+ #~ "Dacă săriți peste:\n"
+ #~ "* S-ar putea să nu aveți acces la întregul set de pachete inclus în "
+ #~ "abonamentul dumneavoastră.\n"
+-#~ "* S-ar putea să rămâneți cu o instalare Red Hat Enterprise Linux "
++#~ "* S-ar putea să rămâneți cu o instalare FrameOS Linux "
+ #~ "nesuporată/necertificată.\n"
+ #~ "* Nu veți primi actualizări de securitate și de programe pentru pachetele "
+ #~ "care nu sunt incluse în abonamentul dumneavoastră."
+diff -uNr -uNr anaconda-13.21.82.orig/po/ru.po anaconda-13.21.82/po/ru.po
+--- anaconda-13.21.82.orig/po/ru.po	2010-11-15 17:23:17.873350387 +0100
++++ anaconda-13.21.82/po/ru.po	2010-12-12 14:36:38.374985904 +0100
+@@ -2242,8 +2242,8 @@
+ msgstr "Минимальный"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/si.po anaconda-13.21.82/po/si.po
+--- anaconda-13.21.82.orig/po/si.po	2010-11-15 17:23:17.953593696 +0100
++++ anaconda-13.21.82/po/si.po	2010-12-12 14:36:38.381229161 +0100
+@@ -2159,8 +2159,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/sk.po anaconda-13.21.82/po/sk.po
+--- anaconda-13.21.82.orig/po/sk.po	2010-11-15 17:23:17.930594330 +0100
++++ anaconda-13.21.82/po/sk.po	2010-12-12 14:36:38.387244869 +0100
+@@ -2197,8 +2197,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/sl.po anaconda-13.21.82/po/sl.po
+--- anaconda-13.21.82.orig/po/sl.po	2010-11-15 17:23:17.924582664 +0100
++++ anaconda-13.21.82/po/sl.po	2010-12-12 14:36:38.392229138 +0100
+@@ -2223,8 +2223,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7339,7 +7339,7 @@
+ #~ "\n"
+ #~ "Če preskočite ta korak:\n"
+ #~ "* Morda ne boste imeli dostopa do polnega naročenega nabora paketov.\n"
+-#~ "* Vaša namestitev Red Hat Enterprise Linux ne bo podprta ali "
++#~ "* Vaša namestitev FrameOS Linux ne bo podprta ali "
+ #~ "certificirana.\n"
+ #~ "* Za pakete na katere niste naročeni ne boste dobili programskih ali "
+ #~ "varnostnih popravkov."
+diff -uNr -uNr anaconda-13.21.82.orig/po/sq.po anaconda-13.21.82/po/sq.po
+--- anaconda-13.21.82.orig/po/sq.po	2010-11-15 17:23:17.875344754 +0100
++++ anaconda-13.21.82/po/sq.po	2010-12-12 14:36:38.398223754 +0100
+@@ -2197,8 +2197,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/sr@latin.po anaconda-13.21.82/po/sr@latin.po
+--- anaconda-13.21.82.orig/po/sr@latin.po	2010-11-15 17:23:17.875344754 +0100
++++ anaconda-13.21.82/po/sr@latin.po	2010-12-12 14:36:38.403224504 +0100
+@@ -2199,8 +2199,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/sr.po anaconda-13.21.82/po/sr.po
+--- anaconda-13.21.82.orig/po/sr.po	2010-11-15 17:23:17.939592133 +0100
++++ anaconda-13.21.82/po/sr.po	2010-12-12 14:36:38.408229096 +0100
+@@ -2192,8 +2192,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/sv.po anaconda-13.21.82/po/sv.po
+--- anaconda-13.21.82.orig/po/sv.po	2010-11-15 17:23:17.939592133 +0100
++++ anaconda-13.21.82/po/sv.po	2010-12-12 14:36:38.414229718 +0100
+@@ -2227,8 +2227,8 @@
+ msgstr "Minimal"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ta.po anaconda-13.21.82/po/ta.po
+--- anaconda-13.21.82.orig/po/ta.po	2010-11-15 17:23:17.891333350 +0100
++++ anaconda-13.21.82/po/ta.po	2010-12-12 14:36:38.420234670 +0100
+@@ -2190,8 +2190,8 @@
+ msgstr "குறிநைபட்ச"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/te.po anaconda-13.21.82/po/te.po
+--- anaconda-13.21.82.orig/po/te.po	2010-11-15 17:23:17.888335130 +0100
++++ anaconda-13.21.82/po/te.po	2010-12-12 14:36:38.427235023 +0100
+@@ -2195,8 +2195,8 @@
+ msgstr "కనీస"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/tg.po anaconda-13.21.82/po/tg.po
+--- anaconda-13.21.82.orig/po/tg.po	2010-11-15 17:23:17.947596558 +0100
++++ anaconda-13.21.82/po/tg.po	2010-12-12 14:36:38.432975480 +0100
+@@ -2010,8 +2010,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/th.po anaconda-13.21.82/po/th.po
+--- anaconda-13.21.82.orig/po/th.po	2010-11-15 17:23:17.937595950 +0100
++++ anaconda-13.21.82/po/th.po	2010-12-12 14:36:38.439244718 +0100
+@@ -2105,8 +2105,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -7142,7 +7142,7 @@
+ #~ "\n"
+ #~ "หากคุณข้ามไป:\n"
+ #~ "* คุณจะไม่สามารถเข้าถึงแพคเกจทั้งหมดที่รวมในค่าบำรุงรักษา\n"
+-#~ "* อาจทำให้การติดตั้งนี้ไม่สนับสนุน/รับรองโดย Red Hat Enterprise Linux\n"
++#~ "* อาจทำให้การติดตั้งนี้ไม่สนับสนุน/รับรองโดย FrameOS Linux\n"
+ #~ "* คุณจะไม่ได้รับอัพเดตซอฟต์แวร์และความปลอดภัยของแพคเกจที่ไม่ได้รวมในค่าบำรุงรักษา"
+ 
+ #~ msgid "boot flag not available for this partition"
+diff -uNr -uNr anaconda-13.21.82.orig/po/tr.po anaconda-13.21.82/po/tr.po
+--- anaconda-13.21.82.orig/po/tr.po	2010-11-15 17:23:17.890333827 +0100
++++ anaconda-13.21.82/po/tr.po	2010-12-12 14:36:38.444997258 +0100
+@@ -1416,7 +1416,7 @@
+ "will be skipped and you will go directly to a command shell.\n"
+ "\n"
+ msgstr ""
+-"Kurtarma ortamı, Red Hat Linux kurulumunuzu bulmaya çalışacak ve bulduğunda "
++"Kurtarma ortamı, FrameOS Linux kurulumunuzu bulmaya çalışacak ve bulduğunda "
+ "sistemi %s dizini altına bağlayacaktır. Bundan sonra sisteminizde gerekli "
+ "düzeltmeleri yapabilirsiniz. Bu işlemin yapılmasını istiyorsanız, 'Devam et' "
+ "seçiniz. Ayrıca isterseniz sistemi oku-yaz kipinde bağlamak yerine salt-"
+@@ -2188,8 +2188,8 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/uk.po anaconda-13.21.82/po/uk.po
+--- anaconda-13.21.82.orig/po/uk.po	2010-11-15 17:23:17.928594097 +0100
++++ anaconda-13.21.82/po/uk.po	2010-12-12 14:36:38.450998160 +0100
+@@ -2236,8 +2236,8 @@
+ msgstr "Мінімально"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, fuzzy, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/ur.po anaconda-13.21.82/po/ur.po
+--- anaconda-13.21.82.orig/po/ur.po	2010-11-15 17:23:17.919585049 +0100
++++ anaconda-13.21.82/po/ur.po	2010-12-12 14:36:38.456996617 +0100
+@@ -2191,7 +2191,7 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "ریڈ ھیٹ انٹرپراُس لینکس ڈبلیو ایس"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/vi.po anaconda-13.21.82/po/vi.po
+--- anaconda-13.21.82.orig/po/vi.po	2010-11-15 17:23:17.872348908 +0100
++++ anaconda-13.21.82/po/vi.po	2010-12-12 14:36:38.462974680 +0100
+@@ -1395,7 +1395,7 @@
+ "will be skipped and you will go directly to a command shell.\n"
+ "\n"
+ msgstr ""
+-"Môi trường phục hồi sẽ cố tìm bản cài đặt Red Hat Linux và gắn nó vào thư "
++"Môi trường phục hồi sẽ cố tìm bản cài đặt FrameOS Linux và gắn nó vào thư "
+ "mục %s. Sau đó bạn có thể tiến hành chỉnh sửa trên hệ thống. Nếu bạn muốn "
+ "thực hiện bước này, hãy chọn 'Tiếp tục'. Bạn cũng có thể chọn gắn hệ thống "
+ "tập tin của bạ trong chế độ chỉ đọc thay vì \"đọc-ghi\" bằng cách chọn \"Chỉ "
+@@ -2172,8 +2172,8 @@
+ 
+ #: installclasses/rhel.py:33
+ #, fuzzy
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux WS"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux WS"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+@@ -3080,7 +3080,7 @@
+ msgid ""
+ "This boot target cannot be deleted because it is for the %s system you are "
+ "about to install."
+-msgstr "Không thể xóa đích boot này vì nó được dùng để cài đặt Red Hat Linux."
++msgstr "Không thể xóa đích boot này vì nó được dùng để cài đặt FrameOS Linux."
+ 
+ #: iw/partition_dialog_gui.py:58
+ msgid "Additional Size Options"
+diff -uNr -uNr anaconda-13.21.82.orig/po/zh_CN.po anaconda-13.21.82/po/zh_CN.po
+--- anaconda-13.21.82.orig/po/zh_CN.po	2010-11-15 17:23:17.922585853 +0100
++++ anaconda-13.21.82/po/zh_CN.po	2010-12-12 14:36:38.467229718 +0100
+@@ -2097,7 +2097,7 @@
+ msgstr "最小"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr "红帽企业 Linux"
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/po/zh_TW.po anaconda-13.21.82/po/zh_TW.po
+--- anaconda-13.21.82.orig/po/zh_TW.po	2010-11-15 17:23:17.878333056 +0100
++++ anaconda-13.21.82/po/zh_TW.po	2010-12-12 14:36:38.472234380 +0100
+@@ -2127,8 +2127,8 @@
+ msgstr "最小"
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
+-msgstr "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
++msgstr "FrameOS Linux"
+ 
+ #: installclasses/rhel.py:34
+ #, python-format
+diff -uNr -uNr anaconda-13.21.82.orig/po/zu.po anaconda-13.21.82/po/zu.po
+--- anaconda-13.21.82.orig/po/zu.po	2010-11-15 17:23:17.886333641 +0100
++++ anaconda-13.21.82/po/zu.po	2010-12-12 14:36:38.477228916 +0100
+@@ -1416,7 +1416,7 @@
+ "will be skipped and you will go directly to a command shell.\n"
+ "\n"
+ msgstr ""
+-"Indalo yokuhlenga angeke izame ukuthola ukufakwa kwe-Red Hat Linux ngaphansi "
++"Indalo yokuhlenga angeke izame ukuthola ukufakwa kwe-FrameOS Linux ngaphansi "
+ "ebese uyenyisa ngaphansi kohlu lwamafayela e%s.  Ngakhoke ungenza nanoma "
+ "iluphi ushintsho oludingekayo kwisistimu yakho.  Uma ufuna ukuqhubeka nalesi "
+ "sigaba khetha 'Qhubeka'.  Ungakhetha futhi ukunyusa amasistimu akho efayela "
+@@ -2203,7 +2203,7 @@
+ msgstr ""
+ 
+ #: installclasses/rhel.py:33
+-msgid "Red Hat Enterprise Linux"
++msgid "FrameOS Linux"
+ msgstr ""
+ 
+ #: installclasses/rhel.py:34
+diff -uNr -uNr anaconda-13.21.82.orig/upgrade.py anaconda-13.21.82/upgrade.py
+--- anaconda-13.21.82.orig/upgrade.py	2010-11-15 17:23:17.954604185 +0100
++++ anaconda-13.21.82/upgrade.py	2010-12-12 14:36:38.480223917 +0100
+@@ -84,7 +84,7 @@
+ 
+     if anaconda.id.rootParts is not None and len(anaconda.id.rootParts) > 0:
+         anaconda.dispatch.skipStep("findinstall", skip = 0)
+-        if productName.find("Red Hat Enterprise Linux") == -1:
++        if productName.find("FrameOS Linux") == -1:
+             anaconda.dispatch.skipStep("installtype", skip = 1)
+     else:
+         anaconda.dispatch.skipStep("findinstall", skip = 1)
+diff -uNr -uNr anaconda-13.21.82.orig/yuminstall.py anaconda-13.21.82/yuminstall.py
+--- anaconda-13.21.82.orig/yuminstall.py	2010-11-15 17:23:17.958593477 +0100
++++ anaconda-13.21.82/yuminstall.py	2010-12-12 14:36:38.481234754 +0100
+@@ -1711,7 +1711,7 @@
+                     supportedUpgradeVersion = 1
+                     break
+ 
+-        if "Red Hat Enterprise Linux" not in productName:
++        if "FrameOS Linux" not in productName:
+             supportedUpgradeVersion = 1
+ 
+         if supportedUpgradeVersion == 0:

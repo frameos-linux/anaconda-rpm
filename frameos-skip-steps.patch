@@ -1,20 +1,20 @@
 diff -uNr -uNr anaconda-13.21.82.orig/dispatch.py anaconda-13.21.82/dispatch.py
---- anaconda-13.21.82.orig/dispatch.py	2010-08-30 21:31:44.000000000 +0200
-+++ anaconda-13.21.82/dispatch.py	2010-12-12 19:16:42.899999149 +0100
-@@ -94,9 +94,6 @@
+--- anaconda-13.21.82.orig/dispatch.py	2010-12-12 20:23:37.536984746 +0100
++++ anaconda-13.21.82/dispatch.py	2010-12-12 20:24:11.238014689 +0100
+@@ -94,9 +94,7 @@
      ("bootloadersetup", bootloaderSetupChoices, ),
      ("bootloader", ),
      ("reposetup", doBackendSetup, ),
 -    ("tasksel", ),
--    ("basepkgsel", doBasePackageSelect, ),
+     ("basepkgsel", doBasePackageSelect, ),
 -    ("group-selection", ),
      ("postselection", doPostSelection, ),
      ("reipl", doReIPL, ),
      ("install", ),
 diff -uNr -uNr anaconda-13.21.82.orig/installclasses/rhel.py anaconda-13.21.82/installclasses/rhel.py
---- anaconda-13.21.82.orig/installclasses/rhel.py	2010-08-30 21:31:44.000000000 +0200
-+++ anaconda-13.21.82/installclasses/rhel.py	2010-12-12 19:15:52.461974992 +0100
-@@ -59,6 +59,12 @@
+--- anaconda-13.21.82.orig/installclasses/rhel.py	2010-12-12 20:23:37.526975407 +0100
++++ anaconda-13.21.82/installclasses/rhel.py	2010-12-12 20:24:35.579984096 +0100
+@@ -59,6 +59,11 @@
      def setSteps(self, anaconda):
          BaseInstallClass.setSteps(self, anaconda)
          anaconda.dispatch.skipStep("partition")
@@ -22,7 +22,6 @@ diff -uNr -uNr anaconda-13.21.82.orig/installclasses/rhel.py anaconda-13.21.82/i
 +        anaconda.dispatch.skipStep("betanag")
 +        anaconda.dispatch.skipStep("tasksel", skip = 1, permanent=1)
 +        anaconda.dispatch.skipStep("group-selection", skip = 1, permanent=1)
-+        anaconda.dispatch.skipStep("basepkgsel")
 +
  
      def getBackend(self):
